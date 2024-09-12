@@ -13,3 +13,4 @@ D:\VSprojects\ASP.NET Core and React\GameLib\Persistence\obj\Debug\net8.0\Persis
 D:\VSprojects\ASP.NET Core and React\GameLib\Persistence\obj\Debug\net8.0\refint\Persistence.dll
 D:\VSprojects\ASP.NET Core and React\GameLib\Persistence\obj\Debug\net8.0\Persistence.pdb
 D:\VSprojects\ASP.NET Core and React\GameLib\Persistence\obj\Debug\net8.0\ref\Persistence.dll
+D:\VSprojects\ASP.NET Core and React\GameLib\Persistence\obj\Debug\net8.0\Persistence.sourcelink.json

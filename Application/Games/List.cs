@@ -12,13 +12,16 @@ namespace Application.Games
     public class List
     {
         public class Query : IRequest<List<Game>> { }
+
         public class Handler : IRequestHandler<Query, List<Game>>
         {
             private readonly AppDataContext context;
+
             public Handler(AppDataContext context)
             {
                 this.context = context;
             }
+
             public async Task<List<Game>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await context.Games.ToListAsync();

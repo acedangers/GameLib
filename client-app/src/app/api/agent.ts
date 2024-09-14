@@ -31,8 +31,8 @@ const requests = {
 const Games = {
     list: () => requests.get<Game[]>('/games'),
     details: (id: string) => requests.get<Game>(`/games/${id}`),
-    create: (activity: Game) => axios.post<void>('/games', activity),
-    update: (activity: Game) => axios.put<void>(`/games/${activity.id}`, activity),
+    create: (game: Game) => axios.post<void>('/games', game),
+    update: (game: Game) => axios.put<void>(`/games/${game.id}`, game),
     delete: (id: string) => axios.delete<void>(`/games/${id}`)
 }
 

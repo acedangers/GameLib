@@ -1,4 +1,4 @@
-import { Button, Card } from "semantic-ui-react";
+import { Button, Card, Grid } from "semantic-ui-react";
 import { Game } from "../../../app/models/game";
 import { Link } from "react-router-dom";
 
@@ -7,7 +7,6 @@ interface Props {
 }
 
 export default function ActivityListItem({ game }: Props) {
-
     return (
         <Card>
             <Card.Header>

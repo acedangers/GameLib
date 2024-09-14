@@ -11,7 +11,7 @@ export default function HomePage() {
                 <Header as='h2' inverted>
                     Welcome to Home Page
                 </Header>
-                <Button as={Link} to='/' size='huge' inverted>
+                <Button as={Link} to='/games' size='huge' inverted>
                     Proceed to games list
                 </Button>
             </Container>

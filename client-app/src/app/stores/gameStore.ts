@@ -18,7 +18,7 @@ export default class GameStore {
         this.loadingInitial = state;
     }
 
-    private setActivity = (game: Game) => {
+    private setGame = (game: Game) => {
         this.gameRegistry.set(game.id, game);
     }
 
@@ -39,9 +39,9 @@ export default class GameStore {
     loadGames = async () => {
         this.setLoadingInitial(true);
         try {
-            const activities = await agent.Games.list();
-            activities.forEach(game => {
-                this.setActivity(game);
+            const games = await agent.Games.list();
+            games.forEach(game => {
+                this.setGame(game);
             })
             this.setLoadingInitial(false);
         } catch (error) {

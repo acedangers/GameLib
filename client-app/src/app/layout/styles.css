@@ -1,3 +1,71 @@
 body {
-    background-color: rgb(84, 6, 84) !important;
+  background-color: rgb(84, 6, 84) !important;
 }
+
+/* home page styles */
+
+.homepage-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    45deg,
+    rgb(84, 6, 84) 5%,
+    rgb(135, 3, 135) 50%,
+    rgb(84, 6, 84) 90%
+  ) !important;
+  height: 100vh;
+}
+
+.homepage-body h1 {
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.homepage-body h2 {
+  font-size: 2em;
+  font-weight: normal;
+}
+
+/* end home page styles */
+
+/* button styles */
+
+/* positive button */
+a.ui.positive.button,
+button.ui.positive.button {
+  background-color: blueviolet;
+}
+
+a.ui.positive.button:hover,
+a.ui.positive.button:focus,
+button.ui.positive.button:hover,
+button.ui.positive.button:focus {
+  background-color: rgb(113, 35, 185);
+}
+
+/* negative button */
+a.ui.negative.button,
+button.ui.negative.button {
+  background-color: rgb(203, 40, 135);
+}
+
+a.ui.negative.button:hover,
+a.ui.negative.button:focus,
+button.ui.negative.button:hover,
+button.ui.negative.button:focus {
+  background-color: rgb(231, 46, 154);
+}
+
+/* button or */
+.ui.buttons .or:before {
+  background-image: linear-gradient(rgb(203, 40, 135) 50%, blueviolet 50%);
+}
+
+/* tag button */
+.tag-button {
+  margin: 2px !important;
+  padding: 5px !important;
+}
+
+/* end button styles */

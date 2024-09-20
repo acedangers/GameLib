@@ -12,6 +12,8 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Game, Game>();
+            CreateMap<Tag, Tag>();
+            CreateMap<Category, Category>();
         }
     }
 }

@@ -1,32 +1,33 @@
 import { Button, Card } from "semantic-ui-react";
-import { Game } from "../../../app/models/game";
 import { Link } from "react-router-dom";
+import { Tag } from "../../../app/models/tag";
+import { Game } from "../../../app/models/game";
 
 interface Props {
-  game: Game;
+  tag: Tag;
+  games: Game[];
 }
 
-export default function GameListItem({ game }: Props) {
+export default function TagListItem({ tag, games }: Props) {
   return (
     <Card fluid>
-      <Card.Header as="h1">{game.name}</Card.Header>
-      <Card.Description>{game.description}</Card.Description>
+      <Card.Header as="h1">{tag.name}</Card.Header>
       <Card.Meta>
-        {game.tags.map((tag) => (
+        {games.map((game) => (
           <Button
-            key={tag}
+            key={game.id}
             className="tag-button"
             as={Link}
-            to={`/tags/${tag}`}
+            to={`/games/${game.id}`}
           >
-            {tag}
+            {game.name}
           </Button>
         ))}
       </Card.Meta>
       <Button.Group floated="right" widths="2">
         <Button as={Link} to={`/games`} negative content="Delete" />
         <Button.Or />
-        <Button as={Link} to={`/games/${game.id}`} positive content="View" />
+        <Button as={Link} to={`/games/${tag.id}`} positive content="View" />
       </Button.Group>
     </Card>
   );

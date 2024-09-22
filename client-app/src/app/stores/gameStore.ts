@@ -6,6 +6,7 @@ export default class GameStore {
   games: Game[] = [];
   gameRegistry = new Map<string, Game>();
   selectedGame: Game | undefined = undefined;
+
   loading = false;
   loadingInitial = false;
 
@@ -69,9 +70,7 @@ export default class GameStore {
 
       return game;
     } else {
-      console.log(
-        `Setting game from api.`
-      );
+      console.log(`Setting game from api.`);
 
       this.setLoadingInitial(true);
       try {

@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
-import { Segment, Grid, Icon } from "semantic-ui-react";
+import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import { Game } from "../../../app/models/game";
+import { Link } from "react-router-dom";
 
 interface Props {
   game: Game;
@@ -22,16 +23,25 @@ export default observer(function GameDetailedInfo({ game }: Props) {
       <Segment attached>
         <Grid verticalAlign="middle">
           <Grid.Column width={1}>
-            <Icon name="tags" size="large" />
+            <Icon name="file alternate outline" size="large" />
           </Grid.Column>
           <Grid.Column width={7}>
             <span>{game.category}</span>
           </Grid.Column>
           <Grid.Column width={1}>
-            <Icon name="file alternate outline" size="large" />
+            <Icon name="tags" size="large" />
           </Grid.Column>
           <Grid.Column width={7}>
-            <span>{game.tags}</span>
+            {game.tags.map((tag) => (
+              <Button
+                key={tag}
+                className="tag-button"
+                as={Link}
+                to={`/tags/${tag}`}
+              >
+                {tag}
+              </Button>
+            ))}
           </Grid.Column>
         </Grid>
       </Segment>

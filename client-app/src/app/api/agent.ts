@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Game } from "../models/game";
+import { Tag } from "../models/tag";
+import { Category } from "../models/category";
 
 axios.defaults.baseURL = 'http://localhost:5001/api';
 
@@ -36,8 +38,26 @@ const Games = {
     delete: (id: string) => axios.delete<void>(`/games/${id}`)
 }
 
+const Tags = {
+    list: () => requests.get<Tag[]>('/tags'),
+    details: (id: string) => requests.get<Tag>(`/tags/${id}`),
+    create: (tag: Tag) => axios.post<void>('/tags', tag),
+    update: (tag: Tag) => axios.put<void>(`/tags/${tag.id}`, tag),
+    delete: (id: string) => axios.delete<void>(`/tags/${id}`)
+}
+
+const Categories = {
+    list: () => requests.get<Category[]>('/categories'),
+    details: (id: string) => requests.get<Category>(`/categories/${id}`),
+    create: (category: Category) => axios.post<void>('/categories', category),
+    update: (category: Category) => axios.put<void>(`/categories/${category.id}`, category),
+    delete: (id: string) => axios.delete<void>(`/categories/${id}`)
+}
+
 const agent = {
-    Games
+    Games,
+    Tags,
+    Categories
 }
 
 export default agent;

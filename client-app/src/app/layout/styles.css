@@ -39,8 +39,6 @@ body {
 
 /* end home page styles */
 
-/* button styles */
-
 /* positive button */
 a.ui.positive.button,
 button.ui.positive.button {
@@ -78,4 +76,8 @@ button.ui.negative.button:focus {
   padding: 5px !important;
 }
 
-/* end button styles */
+/* segment */
+.ui.basic.top.attached.segment {
+  background-color: rgb(137, 10, 137);
+  border: 1px solid #d4d4d5;
+}

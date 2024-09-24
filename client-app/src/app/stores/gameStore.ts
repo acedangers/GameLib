@@ -3,31 +3,40 @@ import { Game } from "../models/game";
 import agent from "../api/agent";
 
 export default class GameStore {
-  games: Game[] = [];
   gameRegistry = new Map<string, Game>();
   selectedGame: Game | undefined = undefined;
+  selectedGames: Game[] | undefined = undefined;
 
-  loading = false;
   loadingInitial = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  // Sets loading initial to specified state.
+  // Required if you don't want to use runInAction to change initial.
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
   };
 
+  // Adds specified game to the gameRegistry.
   private setGame = (game: Game) => {
     this.gameRegistry.set(game.id, game);
   };
 
+  // Returns specified game from the gameRegistry.
+  private getGame = (id: string) => {
+    return this.gameRegistry.get(id);
+  };
+
+  // Returns array of games sorted by category name in alphabetical order.
   get gamesByCategory() {
     return Array.from(this.gameRegistry.values()).sort((a, b) =>
       a.category.localeCompare(b.category)
     );
   }
 
+  // Returns object of games grouped by category. Key - category name, values - game array.
   get groupedGames() {
     return Object.entries(
       this.gamesByCategory.reduce((games, game) => {
@@ -38,6 +47,7 @@ export default class GameStore {
     );
   }
 
+  // Loads all the games from api and adds them to gameRegistry.
   loadGames = async () => {
     this.setLoadingInitial(true);
     try {
@@ -52,10 +62,7 @@ export default class GameStore {
     }
   };
 
-  private getGame = (id: string) => {
-    return this.gameRegistry.get(id);
-  };
-
+  // Loads game with specified id. Can load from cached gameRegistry and from api.
   loadGame = async (id: string) => {
     let game = this.getGame(id);
 
@@ -65,7 +72,7 @@ export default class GameStore {
       );
 
       runInAction(() => {
-        this.selectedGame = game; // Use cached game if complete
+        this.selectedGame = game; // Use cached game if complete.
       });
 
       return game;
@@ -77,15 +84,58 @@ export default class GameStore {
         game = await agent.Games.details(id);
 
         runInAction(() => {
-          this.setGame(game!); // Cache the new game
-          this.selectedGame = game; // Set the newly fetched game
+          this.setGame(game!); // Cache the new game.
+          this.selectedGame = game; // Set the newly fetched game.
         });
-        this.setLoadingInitial(false); // Done loading
         return game;
       } catch (error) {
         console.log(error);
+      } finally {
         this.setLoadingInitial(false);
       }
+    }
+  };
+
+  // Loads games with specified array of ids. Can load from cached gameRegistry and from api.
+  loadGamesByIds = async (gameIds: string[]) => {
+    try {
+      const games: Game[] = [];
+
+      // Iterate over the gameIds and fetch or retrieve from cache
+      for (const id of gameIds) {
+        let game = this.getGame(id); // Check if game exists in cache
+
+        if (game) {
+          // If game is in the cache, use it
+          console.log(
+            `Fetching game from cache: ${game.name}`
+          );
+          games.push(game);
+        } else {
+          this.setLoadingInitial(true);
+          // If game is not in the cache, fetch it from the API
+          const fetchedGame = await agent.Games.details(id);
+          console.log(`Fetched game from API: ${fetchedGame.name}`);
+
+          runInAction(() => {
+            if (fetchedGame) {
+              this.setGame(fetchedGame); // Cache the fetched game
+              games.push(fetchedGame);
+            }
+          });
+        }
+      };
+
+      // After fetching all games, update selectedGames
+      runInAction(() => {
+        this.selectedGames = games;
+      });
+
+      return games;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setLoadingInitial(false); // End loading state
     }
   };
 }

@@ -6,14 +6,21 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import TagList from "./TagList";
 
 export default observer(function TagDashboard() {
-  const { tagStore } = useStore();
-  const { loadTags, tagRegistry } = tagStore;
+  const { tagStore, gameStore } = useStore();
+  const { loadTags, tagRegistry, loadingInitial } = tagStore;
 
   useEffect(() => {
     if (tagRegistry.size <= 1) loadTags();
   }, [loadTags]);
 
-  if (tagStore.loadingInitial)
+
+  const { loadGames, gameRegistry } = gameStore;
+
+  useEffect(() => {
+    if (gameRegistry.size <= 10) loadGames();
+  }, [loadGames]);
+
+  if (loadingInitial)
     return <LoadingComponent content="Loading app" />;
 
   return (

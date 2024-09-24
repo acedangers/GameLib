@@ -3,16 +3,11 @@ import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import { Fragment } from "react/jsx-runtime";
 import TagListItem from "./TagListItem";
-import { useEffect } from "react";
 
 export default observer(function TagList() {
   const { tagStore, gameStore } = useStore();
   const { groupedTags: tags } = tagStore;
-  const { loadGames, gameRegistry } = gameStore;
-
-  useEffect(() => {
-    if (gameRegistry.size <= 1) loadGames();
-  }, [loadGames]);
+  const { gameRegistry } = gameStore;
 
   return (
     <>

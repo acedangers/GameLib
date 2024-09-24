@@ -3,11 +3,9 @@ import { Tag } from "../models/tag";
 import agent from "../api/agent";
 
 export default class TagStore {
-  tags: Tag[] = [];
   tagRegistry = new Map<string, Tag>();
   selectedTag: Tag | undefined = undefined;
 
-  loading = false;
   loadingInitial = false;
 
   constructor() {
@@ -23,8 +21,9 @@ export default class TagStore {
   };
 
   get tagsByName() {
-    const tags = Array.from(this.tagRegistry.values())
-      .sort((a, b) => b.gameIds.length - a.gameIds.length)
+    const tags = Array.from(this.tagRegistry.values()).sort(
+      (a, b) => b.gameIds.length - a.gameIds.length
+    );
     return tags;
   }
 
@@ -62,7 +61,7 @@ export default class TagStore {
     if (tag) {
       console.log(
         `Setting tag from cache: ${tag.name}, ${tag.gameIds.map(
-          (g) => g + ", "
+          (t) => " " + t
         )}`
       );
 

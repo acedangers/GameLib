@@ -21,7 +21,6 @@ namespace Application.Core
             CreateMap<Tag, TagDto>()
             .ForMember(dest => dest.GameIds, opt => opt.MapFrom(src => src.Games.Select(g => g.Id).ToList()));
 
-
             CreateMap<Category, CategoryDto>()
             .ForMember(dest => dest.GameIds, opt => opt.MapFrom(src => src.Games.Select(g => g.Id).ToList()));
         }

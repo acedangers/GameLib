@@ -25,9 +25,9 @@ export default function TagListItem({ tag, games }: Props) {
         ))}
       </Card.Meta>
       <Button.Group floated="right" widths="2">
-        <Button as={Link} to={`/games`} negative content="Delete" />
-        <Button.Or />
-        <Button as={Link} to={`/games/${tag.id}`} positive content="View" />
+        {/* <Button as={Link} to={`/games`} negative content="Delete" />
+        <Button.Or /> */}
+        <Button as={Link} to={`/tags/${tag.id}`} positive content="View" />
       </Button.Group>
     </Card>
   );

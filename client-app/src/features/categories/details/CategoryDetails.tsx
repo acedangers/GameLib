@@ -4,30 +4,32 @@ import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import TagDetailedHeader from "./TagDetailedHeader";
+import CategoryDetailedHeader from "./CategoryDetailedHeader";
 import GameListItem from "../../games/dashboard/GameListItem";
 
-export default observer(function TagDetails() {
-  const { tagStore, gameStore } = useStore();
-  const { selectedTag: tag, loadTag, loadingInitial: tagLI } = tagStore;
-  const { name } = useParams();
+export default observer(function CategoryDetails() {
+  const { categoryStore, gameStore } = useStore();
+
+  const { selectedCategory: category, loadCategory, loadingInitial: categoryLI } = categoryStore;
   const { loadGamesByIds, selectedGames, loadingInitial: gamesLI } = gameStore;
 
-  useEffect(() => {
-    if (name) loadTag(name);
-  }, [name, loadTag]);
+  const { name } = useParams();
 
   useEffect(() => {
-    if (tag) loadGamesByIds(tag.gameIds);
-  }, [tag, loadGamesByIds]);
+    if (name) loadCategory(name);
+  }, [name, loadCategory]);
 
-  if (tagLI || gamesLI || !tag || !selectedGames) return <LoadingComponent />;
+  useEffect(() => {
+    if (category) loadGamesByIds(category.gameIds);
+  }, [category, loadGamesByIds]);
 
-  console.log(`Loaded tag: ${tag.name}, ${tag.gameIds.map((id) => " " + id)}`);
+  if (categoryLI || gamesLI || !category || !selectedGames) return <LoadingComponent />;
+
+  console.log(`Loaded category: ${category.name}, ${category.gameIds.map((id) => " " + id)}`);
 
   if (selectedGames.length > 0) {
     console.log(
-      `Loaded games from tag gameIds: ${selectedGames.map((g) => " " + g.name)}`
+      `Loaded games from category gameIds: ${selectedGames.map((g) => " " + g.name)}`
     );
   } else {
     console.log(`Games didn't load`);
@@ -36,9 +38,9 @@ export default observer(function TagDetails() {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <TagDetailedHeader tag={tag} />
+        <CategoryDetailedHeader category={category} />
         <Segment attached="top">
-          {selectedGames!.map((game) => (
+          {selectedGames.map((game) => (
             <GameListItem key={game.id} game={game} />
           ))}
         </Segment>

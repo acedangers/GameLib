@@ -18,7 +18,7 @@ export default observer(function GameDetails() {
 
   if (loadingInitial || !game) return <LoadingComponent />;
 
-  console.log(`Loaded game: ${game.name}, ${game.category}, ${game.description}`);
+  console.log(`Loaded game: ${game.name}, ${game.categoryName}, ${game.description}`);
 
   return (
     <Grid>

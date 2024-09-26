@@ -11,6 +11,7 @@ export default function NavBar() {
         </Menu.Item>
         <Menu.Item as={NavLink} to="/games" name="Games" />
         <Menu.Item as={NavLink} to="/tags" name="Tags" />
+        <Menu.Item as={NavLink} to="/categories" name="Categories" />
       </Container>
     </Menu>
   );

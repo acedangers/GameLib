@@ -12,14 +12,14 @@ export default function GameListItem({ game }: Props) {
       <Card.Header as="h1">{game.name}</Card.Header>
       <Card.Description>{game.description}</Card.Description>
       <Card.Meta>
-        {game.tags.map((tag) => (
+        {game.tagNames.map((tagName) => (
           <Button
-            key={tag}
+            key={tagName}
             className="tag-button"
             as={Link}
-            to={`/tags/${tag}`}
+            to={`/tags/${tagName}`}
           >
-            {tag}
+            {tagName}
           </Button>
         ))}
       </Card.Meta>

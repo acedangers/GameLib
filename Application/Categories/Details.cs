@@ -8,16 +8,16 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Tags
+namespace Application.Categories
 {
     public class Details
     {
-        public class Query : IRequest<TagDto>
+        public class Query : IRequest<CategoryDto>
         {
             public string Name { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, TagDto>
+        public class Handler : IRequestHandler<Query, CategoryDto>
         {
             private readonly AppDataContext context;
             private readonly IMapper mapper;
@@ -28,16 +28,16 @@ namespace Application.Tags
                 this.mapper = mapper;
             }
 
-            public async Task<TagDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<CategoryDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var tag = await context.Tags
-                    .Include(t => t.Games)
-                    .FirstOrDefaultAsync(t => t.Name == request.Name, cancellationToken);
+                var category = await context.Categories
+                    .Include(c => c.Games)
+                    .FirstOrDefaultAsync(c => c.Name == request.Name, cancellationToken);
 
-                if (tag == null)
-                    throw new Exception("Tag not found");
+                if (category == null)
+                    throw new Exception("Category not found");
 
-                return mapper.Map<TagDto>(tag);
+                return mapper.Map<CategoryDto>(category);
             }
         }
     }

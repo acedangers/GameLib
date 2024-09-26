@@ -20,7 +20,7 @@ export default class TagStore {
     this.tagRegistry.set(tag.id, tag);
   };
 
-  get tagsByName() {
+  get tagsByLength() {
     const tags = Array.from(this.tagRegistry.values()).sort(
       (a, b) => b.gameIds.length - a.gameIds.length
     );
@@ -29,7 +29,7 @@ export default class TagStore {
 
   get groupedTags() {
     return Object.entries(
-      this.tagsByName.reduce((tags, tag) => {
+      this.tagsByLength.reduce((tags, tag) => {
         const name = tag.name;
         tags[name] = tags[name] ? [...tags[name], tag] : [tag];
         return tags;
@@ -51,12 +51,16 @@ export default class TagStore {
     }
   };
 
-  private getTag = (id: string) => {
-    return this.tagRegistry.get(id);
+  private getTag = (name: string) => {
+    for (const [, tag] of this.tagRegistry) {
+      if (tag.name === name) {
+        return tag;
+      }
+    }
   };
 
-  loadTag = async (id: string) => {
-    let tag = this.getTag(id);
+  loadTag = async (name: string) => {
+    let tag = this.getTag(name);
 
     if (tag) {
       console.log(
@@ -75,16 +79,17 @@ export default class TagStore {
 
       this.setLoadingInitial(true);
       try {
-        tag = await agent.Tags.details(id);
+        tag = await agent.Tags.details(name);
 
         runInAction(() => {
           this.setTag(tag!); // Cache the new tag
           this.selectedTag = tag; // Set the newly fetched tag
         });
-        this.setLoadingInitial(false); // Done loading
+        
         return tag;
       } catch (error) {
         console.log(error);
+      } finally {
         this.setLoadingInitial(false);
       }
     }

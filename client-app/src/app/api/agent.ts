@@ -40,7 +40,7 @@ const Games = {
 
 const Tags = {
     list: () => requests.get<Tag[]>('/tags'),
-    details: (id: string) => requests.get<Tag>(`/tags/${id}`),
+    details: (name: string) => requests.get<Tag>(`/tags/${name}`),
     create: (tag: Tag) => axios.post<void>('/tags', tag),
     update: (tag: Tag) => axios.put<void>(`/tags/${tag.id}`, tag),
     delete: (id: string) => axios.delete<void>(`/tags/${id}`)
@@ -48,7 +48,7 @@ const Tags = {
 
 const Categories = {
     list: () => requests.get<Category[]>('/categories'),
-    details: (id: string) => requests.get<Category>(`/categories/${id}`),
+    details: (name: string) => requests.get<Category>(`/categories/${name}`),
     create: (category: Category) => axios.post<void>('/categories', category),
     update: (category: Category) => axios.put<void>(`/categories/${category.id}`, category),
     delete: (id: string) => axios.delete<void>(`/categories/${id}`)

@@ -1,7 +1,7 @@
 export interface Game {
     id: string
     name: string
-    category: string
-    tags: string[]
+    categoryName: string
+    tagNames: string[]
     description: string
 }

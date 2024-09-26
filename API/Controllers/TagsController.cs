@@ -25,10 +25,10 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
-        [HttpGet("{id}")] //api/tags/{id}
-        public async Task<ActionResult<TagDto>> GetTag(Guid id)
+        [HttpGet("{name}")] //api/tags/{name}
+        public async Task<ActionResult<TagDto>> GetTag(string name)
         {
-            return await Mediator.Send(new Details.Query { Id = id });
+            return await Mediator.Send(new Details.Query { Name = name });
         }
     }
 }

@@ -26,13 +26,13 @@ export default observer(function GameDetailedInfo({ game }: Props) {
             <Icon name="file alternate outline" size="large" />
           </Grid.Column>
           <Grid.Column width={7}>
-            <span>{game.category}</span>
+            <span>{game.categoryName}</span>
           </Grid.Column>
           <Grid.Column width={1}>
             <Icon name="tags" size="large" />
           </Grid.Column>
           <Grid.Column width={7}>
-            {game.tags.map((tag) => (
+            {game.tagNames.map((tag) => (
               <Button
                 key={tag}
                 className="tag-button"

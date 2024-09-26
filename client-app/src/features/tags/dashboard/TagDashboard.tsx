@@ -17,7 +17,7 @@ export default observer(function TagDashboard() {
   const { loadGames, gameRegistry } = gameStore;
 
   useEffect(() => {
-    if (gameRegistry.size <= 10) loadGames();
+    if (gameRegistry.size < 10) loadGames();
   }, [loadGames]);
 
   if (loadingInitial)

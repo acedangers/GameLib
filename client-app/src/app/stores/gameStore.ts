@@ -32,7 +32,7 @@ export default class GameStore {
   // Returns array of games sorted by category name in alphabetical order.
   get gamesByCategory() {
     return Array.from(this.gameRegistry.values()).sort((a, b) =>
-      a.category.localeCompare(b.category)
+      a.categoryName.localeCompare(b.categoryName)
     );
   }
 
@@ -40,7 +40,7 @@ export default class GameStore {
   get groupedGames() {
     return Object.entries(
       this.gamesByCategory.reduce((games, game) => {
-        const category = game.category;
+        const category = game.categoryName;
         games[category] = games[category] ? [...games[category], game] : [game];
         return games;
       }, {} as { [key: string]: Game[] })
@@ -68,7 +68,7 @@ export default class GameStore {
 
     if (game) {
       console.log(
-        `Setting game from cache: ${game.name}, ${game.category}, ${game.description}`
+        `Setting game from cache: ${game.name}, ${game.categoryName}, ${game.description}`
       );
 
       runInAction(() => {

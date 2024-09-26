@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using Domain.DTO;
 using MediatR;
@@ -10,34 +12,29 @@ using Persistence;
 
 namespace Application.Games
 {
-    public class List
-    {
-        public class Query : IRequest<List<GameDto>> { }
+	public class List
+	{
+		public class Query : IRequest<List<GameDto>> { }
 
-        public class Handler : IRequestHandler<Query, List<GameDto>>
-        {
-            private readonly AppDataContext context;
+		public class Handler : IRequestHandler<Query, List<GameDto>>
+		{
+			private readonly AppDataContext context;
+			private readonly IMapper mapper;
 
-            public Handler(AppDataContext context)
-            {
-                this.context = context;
-            }
+			public Handler(AppDataContext context, IMapper mapper)
+			{
+				this.context = context;
+				this.mapper = mapper;
+			}
 
-            public async Task<List<GameDto>> Handle(Query request, CancellationToken cancellationToken)
-            {
-                return await context.Games
-                .Include(g => g.Category)
-                .Include(g => g.Tags)
-                .Select(g => new GameDto
-                {
-                    Id = g.Id,
-                    Name = g.Name,
-                    Description = g.Description,
-                    Category = g.Category.Name,
-                    Tags = g.Tags.Select(t => t.Name).ToList(),
-                })
-                .ToListAsync(cancellationToken);
-            }
-        }
-    }
+			public async Task<List<GameDto>> Handle(Query request, CancellationToken cancellationToken)
+			{
+				return await context.Games
+					.Include(g => g.Category)
+					.Include(g => g.Tags)
+					.ProjectTo<GameDto>(mapper.ConfigurationProvider)
+					.ToListAsync(cancellationToken);
+			}
+		}
+	}
 }

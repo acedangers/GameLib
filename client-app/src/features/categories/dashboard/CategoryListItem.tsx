@@ -1,17 +1,17 @@
 import { Button, Card } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { Tag } from "../../../app/models/tag";
+import { Category } from "../../../app/models/category";
 import { Game } from "../../../app/models/game";
 
 interface Props {
-  tag: Tag;
+  category: Category;
   games: Game[];
 }
 
-export default function TagListItem({ tag, games }: Props) {
+export default function TagListItem({ category, games }: Props) {
   return (
     <Card fluid>
-      <Card.Header as="h1">{tag.name}</Card.Header>
+      <Card.Header as="h1">{category.name}</Card.Header>
       <Card.Meta>
         {games.map((game) => (
           <Button
@@ -27,7 +27,7 @@ export default function TagListItem({ tag, games }: Props) {
       <Button.Group floated="right" widths="2">
         {/* <Button as={Link} to={`/games`} negative content="Delete" />
         <Button.Or /> */}
-        <Button as={Link} to={`/tags/${tag.name}`} positive content="View" />
+        <Button as={Link} to={`/categories/${category.name}`} positive content="View" />
       </Button.Group>
     </Card>
   );

@@ -4,14 +4,23 @@ import { NavLink } from "react-router-dom";
 export default function NavBar() {
   return (
     <Menu inverted fixed="top">
-      <Container>
+      <Container className="navBar">
         <Menu.Item as={NavLink} to="/" header>
           <Icon name="home" />
-          Home
+          <span>Home</span>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/games" name="Games" />
-        <Menu.Item as={NavLink} to="/tags" name="Tags" />
-        <Menu.Item as={NavLink} to="/categories" name="Categories" />
+        <Menu.Item as={NavLink} to="/games">
+          <Icon name="game" />
+          <span>Games</span>
+        </Menu.Item>
+        <Menu.Item as={NavLink} to="/tags" name="Tags">
+          <Icon name="tags" />
+          <span>Tags</span>
+        </Menu.Item>
+        <Menu.Item as={NavLink} to="/categories" name="Categories">
+          <Icon name="folder open" />
+          <span>Categories</span>
+        </Menu.Item>
       </Container>
     </Menu>
   );

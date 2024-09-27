@@ -12,8 +12,42 @@ body {
   ) !important;
 }
 
-/* home page styles */
+div.ui.container.navBar a.item {
+  font-weight: bold;
+  position: relative;
+  color: transparent;
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
 
+div.ui.container.navBar a.item:hover,
+div.ui.container.navBar a.item.active {
+  font-weight: bold;
+  color: white;
+}
+
+a.item span {
+  max-width: 0;
+  /* -webkit-transition: max-width 1s; */
+  transition: max-width 1s, margin-left 1s ease-in;
+  display: inline-block;
+  text-align: justify;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+a.item:hover span,
+a.item.active span {
+  max-width: 10rem;
+  margin-left: 10px;
+  transition: max-width 1s, margin-left 0s;
+}
+
+a.item i.icon {
+  color: #d4d4d5;
+  margin: 0 !important;
+}
+
+/* home page styles */
 .homepage-body {
   display: flex;
   align-items: center;
@@ -35,6 +69,30 @@ body {
 .homepage-body h2 {
   font-size: 2em;
   font-weight: normal;
+}
+
+a.ui.huge.basic.button.homepage {
+  border-style: solid;
+  border-radius: 20px;
+  border-color: #d4d4d5;
+
+  color: #d4d4d5 !important;
+  font-weight: 700 !important;
+
+  transition: border-radius 0.5s ease, border-style 0.5s ease,
+    background-color 0.5s ease, color 0.5s ease;
+}
+
+a.ui.huge.basic.button.homepage:hover,
+a.ui.huge.basic.button.homepage:focus {
+  border-style: solid;
+  border-radius: 10px;
+  border-color: rgb(153, 12, 153) !important;
+  border-color: #d4d4d5;
+  box-shadow: none;
+
+  color: rgb(153, 12, 153) !important;
+  font-weight: 700 !important;
 }
 
 /* end home page styles */

@@ -4,13 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { v4 as uuid } from "uuid";
 
-import {
-  Button,
-  DropdownProps,
-  Form,
-  Header,
-  Segment,
-} from "semantic-ui-react";
+import { Button, DropdownProps, Form, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "app/layout/LoadingComponent";
 import { Game } from "app/models/game";
 
@@ -18,21 +12,11 @@ interface Params {
   setDisplay?: (value: boolean) => void;
 }
 
-export default observer(function GameForm({ setDisplay }: Params) {
+const GameForm = ({ setDisplay }: Params) => {
   const { gameStore, categoryStore, tagStore } = useStore();
+  const { createGame, updateGame, loading, loadGame, loadingInitial: gamesLI } = gameStore;
 
-  const {
-    createGame,
-    updateGame,
-    loading,
-    loadGame,
-    loadingInitial: gamesLI,
-  } = gameStore;
-  const {
-    loadCategories,
-    categoryRegistry,
-    loadingInitial: categoriesLI,
-  } = categoryStore;
+  const { loadCategories, categoryRegistry, loadingInitial: categoriesLI } = categoryStore;
   const { loadTags, tagRegistry, loadingInitial: tagsLI } = tagStore;
 
   const { id } = useParams();
@@ -64,7 +48,7 @@ export default observer(function GameForm({ setDisplay }: Params) {
     }
   }, [id, loadGame]);
 
-  function handleSubmit() {
+  const handleSubmit = () => {
     if (!game.id) {
       game.id = uuid();
       createGame(game).then(() => navigate(`/games/${game.id}`));
@@ -72,25 +56,22 @@ export default observer(function GameForm({ setDisplay }: Params) {
       updateGame(game).then(() => navigate(`/games/${game.id}`));
     }
     if (setDisplay) setDisplay(false);
-  }
+  };
 
-  function handleInputChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setGame({ ...game, [name]: value });
-  }
+  };
 
-  function handleInputChangeDlist(
+  const handleInputChangeDlist = (
     _event: SyntheticEvent<HTMLElement, Event>,
     data: DropdownProps
-  ) {
+  ) => {
     const { name, value } = data;
     setGame({ ...game, [name]: value });
-  }
+  };
 
-  if (gamesLI || categoriesLI || tagsLI)
-    return <LoadingComponent content="Loading app" />;
+  if (gamesLI || categoriesLI || tagsLI) return <LoadingComponent content="Loading app" />;
 
   const categoryOptions = Array.from(categoryRegistry.values()).map((c) => ({
     text: c.name,
@@ -106,12 +87,7 @@ export default observer(function GameForm({ setDisplay }: Params) {
     <Segment style={{ marginTop: "36.2px" }} clearing>
       <Header>{action} Game</Header>
       <Form onSubmit={handleSubmit} autoComplete="off">
-        <Form.Input
-          placeholder="Name"
-          value={game.name}
-          name="name"
-          onChange={handleInputChange}
-        />
+        <Form.Input placeholder="Name" value={game.name} name="name" onChange={handleInputChange} />
         <Form.TextArea
           placeholder="Description"
           value={game.description}
@@ -139,17 +115,13 @@ export default observer(function GameForm({ setDisplay }: Params) {
         />
 
         <Button.Group widths="2">
-          <Button
-            as={Link}
-            to={`/games/${game.id}`}
-            negative
-            type="button"
-            content="Cancel"
-          />
+          <Button as={Link} to={`/games/${game.id}`} negative type="button" content="Cancel" />
           <Button.Or />
           <Button loading={loading} positive type="submit" content="Submit" />
         </Button.Group>
       </Form>
     </Segment>
   );
-});
+};
+
+export default observer(GameForm);

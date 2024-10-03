@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { observer } from "mobx-react-lite";
 
 import { Button, Header, Item, Segment } from "semantic-ui-react";
 import { Tag } from "app/models/tag";
@@ -8,7 +7,7 @@ interface Props {
   tag: Tag;
 }
 
-export default observer(function TagDetailedHeader({ tag }: Props) {
+const TagDetailedHeader = ({ tag }: Props) => {
   return (
     <Segment.Group>
       <Segment basic attached="top">
@@ -28,4 +27,6 @@ export default observer(function TagDetailedHeader({ tag }: Props) {
       </Segment>
     </Segment.Group>
   );
-});
+};
+
+export default TagDetailedHeader;

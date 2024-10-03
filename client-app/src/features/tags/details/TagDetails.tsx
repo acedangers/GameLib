@@ -8,7 +8,7 @@ import LoadingComponent from "app/layout/LoadingComponent";
 import TagDetailedHeader from "./TagDetailedHeader";
 import GameListItem from "components/games/dashboard/GameListItem";
 
-export default observer(function TagDetails() {
+const TagDetails = () => {
   const { tagStore, gameStore } = useStore();
 
   const { selectedTag: tag, loadTag, loadingInitial: tagLI } = tagStore;
@@ -29,9 +29,7 @@ export default observer(function TagDetails() {
   console.log(`Loaded tag: ${tag.name}, ${tag.gameIds.map((id) => " " + id)}`);
 
   if (selectedGames.length > 0) {
-    console.log(
-      `Loaded games from tag gameIds: ${selectedGames.map((g) => " " + g.name)}`
-    );
+    console.log(`Loaded games from tag gameIds: ${selectedGames.map((g) => " " + g.name)}`);
   } else {
     console.log(`Games didn't load`);
   }
@@ -49,4 +47,6 @@ export default observer(function TagDetails() {
       <Grid.Column width={6}></Grid.Column>
     </Grid>
   );
-});
+};
+
+export default observer(TagDetails);

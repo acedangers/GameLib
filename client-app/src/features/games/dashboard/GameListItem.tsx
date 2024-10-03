@@ -9,7 +9,7 @@ interface Props {
   game: Game;
 }
 
-const GameListItem1 = ({ game }: Props) => {
+const GameListItem = ({ game }: Props) => {
   const { gameStore } = useStore();
   const { deleteGame } = gameStore;
 
@@ -19,12 +19,7 @@ const GameListItem1 = ({ game }: Props) => {
       <Card.Description>{game.description}</Card.Description>
       <Card.Meta>
         {game.tagNames.map((tagName) => (
-          <Button
-            key={tagName}
-            className="tag-button"
-            as={Link}
-            to={`/tags/${tagName}`}
-          >
+          <Button key={tagName} className="tag-button" as={Link} to={`/tags/${tagName}`}>
             {tagName}
           </Button>
         ))}
@@ -38,4 +33,4 @@ const GameListItem1 = ({ game }: Props) => {
   );
 };
 
-export default observer(GameListItem1);
+export default observer(GameListItem);

@@ -7,7 +7,7 @@ import LoadingComponent from "app/layout/LoadingComponent";
 import GameList from "./GameList";
 import GameForm from "../form/GameForm";
 
-export default observer(function GameDashboard() {
+const GameDashboard = () => {
   const { gameStore } = useStore();
   const { loadGames, gameRegistry } = gameStore;
 
@@ -15,8 +15,7 @@ export default observer(function GameDashboard() {
     if (gameRegistry.size < 10) loadGames();
   }, [loadGames]);
 
-  if (gameStore.loadingInitial)
-    return <LoadingComponent content="Loading app" />;
+  if (gameStore.loadingInitial) return <LoadingComponent content="Loading app" />;
 
   return (
     <Grid>
@@ -28,4 +27,6 @@ export default observer(function GameDashboard() {
       </Grid.Column>
     </Grid>
   );
-});
+};
+
+export default observer(GameDashboard);

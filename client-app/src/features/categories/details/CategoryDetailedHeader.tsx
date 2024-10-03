@@ -8,7 +8,7 @@ interface Props {
   category: Category;
 }
 
-export default observer(function CategoryDetailedHeader({ category }: Props) {
+const CategoryDetailedHeader = ({ category }: Props) => {
   return (
     <Segment.Group>
       <Segment basic attached="top">
@@ -28,4 +28,6 @@ export default observer(function CategoryDetailedHeader({ category }: Props) {
       </Segment>
     </Segment.Group>
   );
-});
+};
+
+export default observer(CategoryDetailedHeader);

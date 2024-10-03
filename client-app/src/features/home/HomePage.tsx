@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { Button, Container, Header, Segment } from "semantic-ui-react";
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <Segment inverted textAlign="center" vertical className="homepage-body">
       <Container text>
@@ -18,4 +18,6 @@ export default function HomePage() {
       </Container>
     </Segment>
   );
-}
+};
+
+export default HomePage;

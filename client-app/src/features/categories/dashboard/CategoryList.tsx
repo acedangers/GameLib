@@ -5,7 +5,7 @@ import { Fragment } from "react/jsx-runtime";
 import { Header } from "semantic-ui-react";
 import CategoryListItem from "./CategoryListItem";
 
-export default observer(function CategoryList() {
+const CategoryList = () => {
   const { categoryStore, gameStore } = useStore();
 
   const { groupedCategories: categories } = categoryStore;
@@ -32,4 +32,6 @@ export default observer(function CategoryList() {
       ))}
     </>
   );
-});
+};
+
+export default observer(CategoryList);

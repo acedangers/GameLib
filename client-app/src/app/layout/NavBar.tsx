@@ -1,7 +1,8 @@
-import { Container, Icon, Menu } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-export default function NavBar() {
+import { Container, Icon, Menu } from "semantic-ui-react";
+
+const NavBar = () => {
   return (
     <Menu inverted fixed="top">
       <Container className="navBar">
@@ -24,4 +25,6 @@ export default function NavBar() {
       </Container>
     </Menu>
   );
-}
+};
+
+export default NavBar;

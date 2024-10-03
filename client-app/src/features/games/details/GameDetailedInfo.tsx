@@ -8,7 +8,7 @@ interface Props {
   game: Game;
 }
 
-export default observer(function GameDetailedInfo({ game }: Props) {
+const GameDetailedInfo = ({ game }: Props) => {
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -34,12 +34,7 @@ export default observer(function GameDetailedInfo({ game }: Props) {
           </Grid.Column>
           <Grid.Column width={7}>
             {game.tagNames.map((tag) => (
-              <Button
-                key={tag}
-                className="tag-button"
-                as={Link}
-                to={`/tags/${tag}`}
-              >
+              <Button key={tag} className="tag-button" as={Link} to={`/tags/${tag}`}>
                 {tag}
               </Button>
             ))}
@@ -48,4 +43,6 @@ export default observer(function GameDetailedInfo({ game }: Props) {
       </Segment>
     </Segment.Group>
   );
-});
+};
+
+export default observer(GameDetailedInfo);

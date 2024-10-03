@@ -6,7 +6,7 @@ import { Grid } from "semantic-ui-react";
 import LoadingComponent from "app/layout/LoadingComponent";
 import TagList from "./TagList";
 
-export default observer(function TagDashboard() {
+const TagDashboard = () => {
   const { tagStore, gameStore } = useStore();
 
   const { loadTags, tagRegistry, loadingInitial: tagsLI } = tagStore;
@@ -30,4 +30,6 @@ export default observer(function TagDashboard() {
       <Grid.Column width="6"></Grid.Column>
     </Grid>
   );
-});
+};
+
+export default observer(TagDashboard);

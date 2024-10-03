@@ -1,12 +1,14 @@
-import "./App.css";
-import "./styles.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import HomePage from "../../features/home/HomePage";
+
+import "./App.css";
+import "./styles.css";
+
 import { Container } from "semantic-ui-react";
+import HomePage from "components/home/HomePage";
 import NavBar from "./NavBar";
 
-function App() {
+const App = () => {
   const location = useLocation();
   return (
     <>
@@ -25,6 +27,6 @@ function App() {
       )}
     </>
   );
-}
+};
 
 export default observer(App);

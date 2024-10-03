@@ -7,10 +7,10 @@ import { Game } from "app/models/game";
 
 interface Props {
   game: Game;
-  setDisplay: (value: boolean) => void,
+  setDisplay: (value: boolean) => void;
 }
 
-export default observer(function GameDetailedHeader({ game, setDisplay }: Props) {
+const GameDetailedHeader = ({ game, setDisplay }: Props) => {
   const { gameStore } = useStore();
   const { deleteGame } = gameStore;
 
@@ -38,4 +38,6 @@ export default observer(function GameDetailedHeader({ game, setDisplay }: Props)
       </Segment>
     </Segment.Group>
   );
-});
+};
+
+export default observer(GameDetailedHeader);

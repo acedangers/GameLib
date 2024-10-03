@@ -6,7 +6,7 @@ import { Header } from "semantic-ui-react";
 import { Fragment } from "react/jsx-runtime";
 import GameListItem from "./GameListItem";
 
-export default observer(function GameList() {
+const GameList = () => {
   const { gameStore } = useStore();
   const { groupedGames } = gameStore;
 
@@ -24,4 +24,6 @@ export default observer(function GameList() {
       ))}
     </>
   );
-});
+};
+
+export default observer(GameList);

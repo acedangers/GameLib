@@ -1,14 +1,15 @@
-import { Grid } from "semantic-ui-react";
-import { useStore } from "../../../app/stores/store";
+import { useEffect, useState } from "react";
+import { useStore } from "app/stores/store";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
-import LoadingComponent from "../../../app/layout/LoadingComponent";
+
+import { Grid } from "semantic-ui-react";
+import LoadingComponent from "app/layout/LoadingComponent";
 import GameDetailedHeader from "./GameDetailedHeader";
 import GameDetailedInfo from "./GameDetailedInfo";
 import GameForm from "../form/GameForm";
 
-export default observer(function GameDetails() {
+const GameDetails = () => {
   const { gameStore } = useStore();
   const { selectedGame: game, loadGame, loadingInitial } = gameStore;
   const { id } = useParams();
@@ -21,24 +22,21 @@ export default observer(function GameDetails() {
 
   if (loadingInitial || !game) return <LoadingComponent />;
 
-  console.log(
-    `Loaded game: ${game.name}, ${game.categoryName}, ${game.description}`
-  );
+  console.log(`Loaded game: ${game.name}, ${game.categoryName}, ${game.description}`);
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <GameDetailedHeader
-          game={game}
-          setDisplay={setDisplay}
-        />
+        <GameDetailedHeader game={game} setDisplay={setDisplay} />
         <GameDetailedInfo game={game} />
       </Grid.Column>
       {display && (
         <Grid.Column width={6}>
-          <GameForm setDisplay={setDisplay}/>
+          <GameForm setDisplay={setDisplay} />
         </Grid.Column>
       )}
     </Grid>
   );
-});
+};
+
+export default observer(GameDetails);

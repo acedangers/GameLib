@@ -8,7 +8,7 @@ import LoadingComponent from "app/layout/LoadingComponent";
 import CategoryDetailedHeader from "./CategoryDetailedHeader";
 import GameListItem from "components/games/dashboard/GameListItem";
 
-export default observer(function CategoryDetails() {
+const CategoryDetails = () => {
   const { categoryStore, gameStore } = useStore();
 
   const { selectedCategory: category, loadCategory, loadingInitial: categoryLI } = categoryStore;
@@ -29,9 +29,7 @@ export default observer(function CategoryDetails() {
   console.log(`Loaded category: ${category.name}, ${category.gameIds.map((id) => " " + id)}`);
 
   if (selectedGames.length > 0) {
-    console.log(
-      `Loaded games from category gameIds: ${selectedGames.map((g) => " " + g.name)}`
-    );
+    console.log(`Loaded games from category gameIds: ${selectedGames.map((g) => " " + g.name)}`);
   } else {
     console.log(`Games didn't load`);
   }
@@ -49,4 +47,6 @@ export default observer(function CategoryDetails() {
       <Grid.Column width={6}></Grid.Column>
     </Grid>
   );
-});
+};
+
+export default observer(CategoryDetails);

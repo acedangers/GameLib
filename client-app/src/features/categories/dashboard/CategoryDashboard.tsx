@@ -6,7 +6,7 @@ import { Grid } from "semantic-ui-react";
 import LoadingComponent from "app/layout/LoadingComponent";
 import CategoryList from "./CategoryList";
 
-export default observer(function CategoryDashboard() {
+const CategoryDashboard = () => {
   const { categoryStore, gameStore } = useStore();
   const { loadCategories, categoryRegistry, loadingInitial } = categoryStore;
 
@@ -30,4 +30,6 @@ export default observer(function CategoryDashboard() {
       <Grid.Column width="6"></Grid.Column>
     </Grid>
   );
-});
+};
+
+export default observer(CategoryDashboard);

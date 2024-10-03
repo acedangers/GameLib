@@ -5,7 +5,7 @@ import { Fragment } from "react/jsx-runtime";
 import { Header } from "semantic-ui-react";
 import TagListItem from "./TagListItem";
 
-export default observer(function TagList() {
+const TagList = () => {
   const { tagStore, gameStore } = useStore();
   const { groupedTags: tags } = tagStore;
   const { gameRegistry } = gameStore;
@@ -30,4 +30,6 @@ export default observer(function TagList() {
       ))}
     </>
   );
-});
+};
+
+export default observer(TagList);

@@ -9,32 +9,24 @@ interface Props {
   games: Game[];
 }
 
-export default function TagListItem({ category, games }: Props) {
+const TagListItem = ({ category, games }: Props) => {
   return (
     <Card fluid>
       <Card.Header as="h1">{category.name}</Card.Header>
       <Card.Meta>
         {games.map((game) => (
-          <Button
-            key={game.id}
-            className="tag-button"
-            as={Link}
-            to={`/games/${game.id}`}
-          >
+          <Button key={game.id} className="tag-button" as={Link} to={`/games/${game.id}`}>
             {game.name}
           </Button>
         ))}
       </Card.Meta>
       <Button.Group floated="right" widths="2">
         {/* <Button as={Link} to={`/games`} negative content="Delete" />
-        <Button.Or /> */}
-        <Button
-          as={Link}
-          to={`/categories/${category.name}`}
-          positive
-          content="View"
-        />
+          <Button.Or /> */}
+        <Button as={Link} to={`/categories/${category.name}`} positive content="View" />
       </Button.Group>
     </Card>
   );
-}
+};
+
+export default TagListItem;

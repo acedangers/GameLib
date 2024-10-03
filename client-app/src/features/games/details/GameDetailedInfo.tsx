@@ -1,7 +1,8 @@
-import { observer } from "mobx-react-lite";
-import { Segment, Grid, Icon, Button } from "semantic-ui-react";
-import { Game } from "../../../app/models/game";
 import { Link } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+
+import { Segment, Grid, Icon, Button } from "semantic-ui-react";
+import { Game } from "app/models/game";
 
 interface Props {
   game: Game;

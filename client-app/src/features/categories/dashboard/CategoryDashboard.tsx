@@ -1,8 +1,9 @@
-import { Grid } from "semantic-ui-react";
-import { useStore } from "../../../app/stores/store";
-import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { useStore } from "app/stores/store";
+import { observer } from "mobx-react-lite";
+
+import { Grid } from "semantic-ui-react";
+import LoadingComponent from "app/layout/LoadingComponent";
 import CategoryList from "./CategoryList";
 
 export default observer(function CategoryDashboard() {
@@ -19,8 +20,7 @@ export default observer(function CategoryDashboard() {
     if (gameRegistry.size < 10) loadGames();
   }, [loadGames]);
 
-  if (loadingInitial)
-    return <LoadingComponent content="Loading app" />;
+  if (loadingInitial) return <LoadingComponent content="Loading app" />;
 
   return (
     <Grid>

@@ -8,6 +8,7 @@ export default class GameStore {
   selectedGames: Game[] | undefined = undefined;
 
   loadingInitial = false;
+  loading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -107,9 +108,7 @@ export default class GameStore {
 
         if (game) {
           // If game is in the cache, use it
-          console.log(
-            `Fetching game from cache: ${game.name}`
-          );
+          console.log(`Fetching game from cache: ${game.name}`);
           games.push(game);
         } else {
           this.setLoadingInitial(true);
@@ -124,7 +123,7 @@ export default class GameStore {
             }
           });
         }
-      };
+      }
 
       // After fetching all games, update selectedGames
       runInAction(() => {
@@ -136,6 +135,56 @@ export default class GameStore {
       console.log(error);
     } finally {
       this.setLoadingInitial(false); // End loading state
+    }
+  };
+
+  createGame = async (game: Game) => {
+    this.loading = true;
+    try {
+      await agent.Games.create(game);
+      runInAction(() => {
+        this.gameRegistry.set(game.id, game);
+        this.selectedGame = game;
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+  updateGame = async (game: Game) => {
+    this.loading = true;
+    try {
+      await agent.Games.update(game);
+      runInAction(() => {
+        this.gameRegistry.set(game.id, game);
+        this.selectedGame = game;
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+  deleteGame = async (id: string) => {
+    this.loading = true;
+    try {
+      await agent.Games.delete(id);
+      runInAction(() => {
+        this.gameRegistry.delete(id);
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
     }
   };
 }

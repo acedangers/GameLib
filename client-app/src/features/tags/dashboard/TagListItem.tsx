@@ -1,7 +1,8 @@
-import { Button, Card } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { Tag } from "../../../app/models/tag";
-import { Game } from "../../../app/models/game";
+
+import { Button, Card } from "semantic-ui-react";
+import { Tag } from "app/models/tag";
+import { Game } from "app/models/game";
 
 interface Props {
   tag: Tag;

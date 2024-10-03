@@ -1,9 +1,11 @@
-import { Grid } from "semantic-ui-react";
-import GameList from "./GameList";
-import { useStore } from "../../../app/stores/store";
-import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { useStore } from "app/stores/store";
+import { observer } from "mobx-react-lite";
+
+import { Grid } from "semantic-ui-react";
+import LoadingComponent from "app/layout/LoadingComponent";
+import GameList from "./GameList";
+import GameForm from "../form/GameForm";
 
 export default observer(function GameDashboard() {
   const { gameStore } = useStore();
@@ -21,7 +23,9 @@ export default observer(function GameDashboard() {
       <Grid.Column width="10">
         <GameList />
       </Grid.Column>
-      <Grid.Column width="6"></Grid.Column>
+      <Grid.Column width="6">
+        <GameForm />
+      </Grid.Column>
     </Grid>
   );
 });

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import { Button, Container, Header, Segment } from "semantic-ui-react";
 
 export default function HomePage() {
@@ -11,7 +12,7 @@ export default function HomePage() {
         <Header as="h2" inverted>
           Your game library
         </Header>
-        <Button className='homepage' basic as={Link} to="/games" size="huge">
+        <Button className="homepage" basic as={Link} to="/games" size="huge">
           Proceed to games
         </Button>
       </Container>

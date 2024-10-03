@@ -97,6 +97,17 @@ a.ui.huge.basic.button.homepage:focus {
 
 /* end home page styles */
 
+/* segment */
+.ui.basic.top.attached.segment {
+  background-color: rgb(137, 10, 137);
+  border: 1px solid #d4d4d5;
+}
+
+/* card */
+.ui.fluid.card {
+    border: none;
+}
+
 /* positive button */
 a.ui.positive.button,
 button.ui.positive.button {
@@ -123,6 +134,22 @@ button.ui.negative.button:focus {
   background-color: rgb(231, 46, 154);
 }
 
+/* primary button */
+a.ui.primary.button,
+button.ui.primary.button {
+  color: black;
+  background-color: rgb(137, 10, 137);
+  border: 1px solid #d4d4d5;
+}
+
+a.ui.primary.button:hover,
+a.ui.primary.button:focus,
+button.ui.primary.button:hover,
+button.ui.primary.button:focus {
+  background-color: rgb(174, 13, 174);
+  border: 1px solid #d4d4d5;
+}
+
 /* button or */
 .ui.buttons .or:before {
   background-image: linear-gradient(rgb(203, 40, 135) 50%, blueviolet 50%);
@@ -134,8 +161,7 @@ button.ui.negative.button:focus {
   padding: 5px !important;
 }
 
-/* segment */
-.ui.basic.top.attached.segment {
-  background-color: rgb(137, 10, 137);
-  border: 1px solid #d4d4d5;
+.ui.form textarea {
+  resize: none;
+  height: 100px;
 }

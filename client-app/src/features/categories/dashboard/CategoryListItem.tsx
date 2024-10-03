@@ -1,7 +1,8 @@
-import { Button, Card } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { Category } from "../../../app/models/category";
-import { Game } from "../../../app/models/game";
+
+import { Button, Card } from "semantic-ui-react";
+import { Category } from "app/models/category";
+import { Game } from "app/models/game";
 
 interface Props {
   category: Category;
@@ -27,7 +28,12 @@ export default function TagListItem({ category, games }: Props) {
       <Button.Group floated="right" widths="2">
         {/* <Button as={Link} to={`/games`} negative content="Delete" />
         <Button.Or /> */}
-        <Button as={Link} to={`/categories/${category.name}`} positive content="View" />
+        <Button
+          as={Link}
+          to={`/categories/${category.name}`}
+          positive
+          content="View"
+        />
       </Button.Group>
     </Card>
   );

@@ -1,11 +1,12 @@
-import { Grid, Segment } from "semantic-ui-react";
-import { useStore } from "../../../app/stores/store";
+import { useEffect } from "react";
+import { useStore } from "app/stores/store";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
-import LoadingComponent from "../../../app/layout/LoadingComponent";
+
+import { Grid, Segment } from "semantic-ui-react";
+import LoadingComponent from "app/layout/LoadingComponent";
 import CategoryDetailedHeader from "./CategoryDetailedHeader";
-import GameListItem from "../../games/dashboard/GameListItem";
+import GameListItem from "components/games/dashboard/GameListItem";
 
 export default observer(function CategoryDetails() {
   const { categoryStore, gameStore } = useStore();

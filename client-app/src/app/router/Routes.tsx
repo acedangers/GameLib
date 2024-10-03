@@ -17,8 +17,6 @@ export const routes: RouteObject[] = [
             //Games routes.
             {path: 'games', element: <GameDashboard />},
             {path: 'games/:id', element: <GameDetails />},
-            // {path: 'createActivity', element: <ActivityForm key={'Create'} />},
-            // {path: 'editActivity/:id', element: <ActivityForm key={'Edit'} />},
 
             //Tags routes.
             {path: 'tags', element: <TagDashboard />},

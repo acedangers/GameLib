@@ -1,12 +1,18 @@
-import { Button, Card } from "semantic-ui-react";
-import { Game } from "../../../app/models/game";
+import { useStore } from "app/stores/store";
 import { Link } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+
+import { Button, Card } from "semantic-ui-react";
+import { Game } from "app/models/game";
 
 interface Props {
   game: Game;
 }
 
-export default function GameListItem({ game }: Props) {
+const GameListItem1 = ({ game }: Props) => {
+  const { gameStore } = useStore();
+  const { deleteGame } = gameStore;
+
   return (
     <Card fluid>
       <Card.Header as="h1">{game.name}</Card.Header>
@@ -24,10 +30,12 @@ export default function GameListItem({ game }: Props) {
         ))}
       </Card.Meta>
       <Button.Group floated="right" widths="2">
-        <Button as={Link} to={`/games`} negative content="Delete" />
+        <Button onClick={() => deleteGame(game.id)} negative content="Delete" />
         <Button.Or />
         <Button as={Link} to={`/games/${game.id}`} positive content="View" />
       </Button.Group>
     </Card>
   );
-}
+};
+
+export default observer(GameListItem1);

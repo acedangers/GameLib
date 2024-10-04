@@ -31,9 +31,6 @@ namespace Application.Games
 
 			public async Task Handle(Command request, CancellationToken cancellationToken)
 			{
-				// Use AutoMapper to update the game properties, excluding navigation properties
-				mapper.Map<Game>(request.GameDto);
-
 				// Fetch the existing game to update
 				var game = await context.Games
 					.Include(g => g.Category)
@@ -45,6 +42,9 @@ namespace Application.Games
 					throw new Exception("Game not found");
 				}
 
+				// Use AutoMapper to update the game properties, excluding navigation properties
+				mapper.Map(request.GameDto, game);
+
 				// Update the Category
 				var category = await context.Categories
 					.FirstOrDefaultAsync(c => c.Name == request.GameDto.CategoryName, cancellationToken);
@@ -55,16 +55,6 @@ namespace Application.Games
 				}
 
 				game.Category = category;
-
-				// Update the Tags
-				var tags = await context.Tags
-					.Where(t => request.GameDto.TagNames.Contains(t.Name))
-					.ToListAsync(cancellationToken);
-
-				if (!tags.Any())
-				{
-					throw new Exception("Tags not found");
-				}
 
 				// Manage the Tags
 				var newTagNames = request.GameDto.TagNames;

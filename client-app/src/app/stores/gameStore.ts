@@ -158,6 +158,7 @@ export default class GameStore {
   updateGame = async (game: Game) => {
     this.loading = true;
     try {
+      console.log(`${game.name}, ${game.description}`);
       await agent.Games.update(game);
       runInAction(() => {
         this.gameRegistry.set(game.id, game);

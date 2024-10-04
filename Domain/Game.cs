@@ -10,7 +10,7 @@ namespace Domain
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }  = null!;
+        public Category Category { get; set; } = null!;
         public List<Tag> Tags { get; } = new List<Tag>();
         public string Description { get; set; }
     }
